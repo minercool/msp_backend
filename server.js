@@ -48,6 +48,7 @@ app.use("/product",productController)
 app.use("/invoice",invoiceController)
 app.use("/checkout",checkoutController)
 app.use("/bill",billController)
+app.use("/test",require('./Controllers/test'))
 app.use('/api/uploads', express.static(path.join(__dirname, 'images')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 const Quote = require("./Models/quoteModel");
