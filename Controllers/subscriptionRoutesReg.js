@@ -8,7 +8,7 @@ const subscriptionModelSchema = require('../Models/SubscriptionModel');
 const Invoice = require('../Models/invoiceModel');
 const productModelSchema = require("../Models/ProductModel");
 
-
+const mailer = require('./email/mailer')
 
 
 router.get('/getdetails',async (req,res)=>{
@@ -69,7 +69,13 @@ router.post('/create',async (req,res)=>{
     // execute request
     await axios(options).then(result => {
       this.sub_id = result.data.SubscriptionId;
-      
+      console.log(req.body.reseller.Informations.FullName, req.body.product , req.body.Customer.Contacts.companyName , req.body.reseller.Informations.Email)
+      try {
+        mailer.commande_souscription(req.body.reseller.Informations.FullName, req.body.product , req.body.Customer.Contacts.companyName , req.body.reseller.Informations.Email)
+        console.log(req.body.reseller.Informations.FullName, req.body.product , req.body.Customer.Contacts.companyName , req.body.reseller.Informations.Email)
+    } catch (error) {
+      res.status(500).json(error.message)
+    }
       const subData = {
         sub : this.sub_id, 
         status: "active",
@@ -213,8 +219,7 @@ router.post('/hardcancel',async (req,res)=>{
     }
     // execute request
     await axios(options).then(result => {
-      
-      
+    //mailer.suspend(name , email) ;
     subscriptionModelSchema.findOneAndUpdate({ sub: req.body.SubscriptionId }, {
       $set: {
         status: "HardCanceled"
@@ -224,6 +229,7 @@ router.post('/hardcancel',async (req,res)=>{
       if (err) console.log("Something wrong when updating data!");
       
   });
+      
       return res.status(201).json(result.data);
       
 

@@ -7,12 +7,12 @@ var uniqueValidator = require('mongoose-unique-validator');
 const ContactInfoSchema = mongoose.Schema({
     CompanyName: {
         type:String,
-        required:true,
-        unique : true,
+        //required:true
+        //unique:true
     },
     Email: {
         type:String,
-        unique : true,
+        //unique:true
     },
     Phone: {
         type:String,
@@ -42,7 +42,7 @@ const AddressSchema = mongoose.Schema({
     },
     Country: {
         type:Object,
-        required:true
+        //required:true
     }
   });
 
@@ -53,11 +53,11 @@ const AddressSchema = mongoose.Schema({
     },
     Email: {
         type:String,
-        required:true
+        //required:true
     },
     Password: {
         type:String,
-        required:true
+        //required:true
     },
     Status: {
         type:String,

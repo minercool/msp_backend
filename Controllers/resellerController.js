@@ -10,6 +10,7 @@ var uuid = require("uuid");
 const nodemailer = require("nodemailer");
 const details = require("../details.json");
 const subResellerModule = require("../Models/SubResellerModel");
+const mailer = require('./email/mailer')
 
 //find all
 router.get("/getresellers", function (req, res) {
@@ -132,6 +133,7 @@ else {
   reseller
     .save()
     .then((data) => {
+      mailer.demande_ouverture_compte(informationsInfo.FullName , informationsInfo.Email)
       return res.status(201).json(data);
     })
     .catch((error) => {
@@ -141,6 +143,7 @@ else {
 });
     
 });
+
 
 router.post("/modify/:id", (req, res) => {
   contactInfo = req.body.contact;
@@ -221,6 +224,12 @@ router.post("/modify/:id", (req, res) => {
     Informations: informations
   });
 
+  if(resl.Informations.creditLimit != informationsInfo.creditLimit){
+    mailer.changement_credit(resl.Contacts.CompanyName ,informationsInfo.creditLimit , resl.Informations.Email )
+  }
+
+  console.log(req.body)
+
   resellerModule
     .findOneAndUpdate(
       { _id: req.params.id },
@@ -257,6 +266,9 @@ router.post("/setStatus", (req, res) => {
       { $set: { "Informations.Status": newstatus } }
     )
     .then((data) => {
+      if(newstatus == 'Active'){
+        mailer.compte_revendeur_cree(email , email)
+      }
       return res.status(201).json({
         Result:
           data == null || data.modifiedCount == 0

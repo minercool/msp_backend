@@ -7,7 +7,7 @@ const https = require('https');
 const subscriptionModelSchema = require('../Models/SubscriptionModel');
 const Invoice = require('../Models/invoiceModel');
 const productModelSchema = require("../Models/ProductModel");
-
+const mailer = require('./email/mailer')
 
 
 
@@ -86,7 +86,6 @@ router.post('/create',async (req,res)=>{
     // execute request
     await axios(options).then(result => {
       this.sub_id = result.data.SubscriptionId;
-      
       const subData = {
         sub : this.sub_id, 
         status: "active",
@@ -272,6 +271,13 @@ router.put('/code',async (req,res)=>{
 router.post('/hardcancel',async (req,res)=>{
 
   let data = req.body
+  console.log(data)
+  try {
+    mailer.suspend(data.name , data.email)
+    console.log('ok')
+} catch (error) {
+    res.status(500).json(error.message)
+}
   const CREDENTIALS = {
       "certurl": process.env.CERTURL,
       "pfx": fs.readFileSync(__dirname + '/../certif/4a1b6f2b91e14bdebdbacfe4cc2840b0744377bc29554a108d93075d2fe965a5.pfx'),
@@ -291,8 +297,7 @@ router.post('/hardcancel',async (req,res)=>{
     }
     // execute request
     await axios(options).then(result => {
-      
-      
+
     subscriptionModelSchema.findOneAndUpdate({ sub: req.body.SubscriptionId }, {
       $set: {
         status: "HardCanceled"
@@ -302,6 +307,7 @@ router.post('/hardcancel',async (req,res)=>{
       if (err) console.log("Something wrong when updating data!");
       
   });
+      
       return res.status(201).json(result.data);
       
 

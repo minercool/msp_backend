@@ -2,6 +2,7 @@ let express = require('express'),
   multer = require('multer'),
   mongoose = require('mongoose'),
   router = express.Router();
+const mailer = require('./email/mailer')
 
 // Multer File upload settings
 const DIR = './public/';
@@ -30,7 +31,7 @@ let Bill = require('../Models/billModel');
 
 // POST User
 router.post('/create-bill', upload.single('file'), (req, res, next) => {
-
+  console.log(req.body)
   const url = req.protocol + '://' + req.get('host')
   const bill = new Bill({
     invoiceId: req.body.invoiceId,
@@ -39,6 +40,7 @@ router.post('/create-bill', upload.single('file'), (req, res, next) => {
     file: url + '/public/' + req.file.filename
   });
   bill.save().then(result => {
+  mailer.facture_comptable(req.body.resellerName , req.body.email)
     
     res.status(201).json({
       message: "User registered successfully!",
