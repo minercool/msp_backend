@@ -31,6 +31,7 @@ module.exports = {
             };
             var htmlToSend = template(replacements);
             var mailOptions = {
+                
                 from: process.env.MAILER_EMAIL,
                 to: email,
                 subject: 'Notification',    

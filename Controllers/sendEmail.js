@@ -95,7 +95,7 @@ router.post('/generateCode', (req, res) => {
       secureConnection: true,
       auth: {
         user: process.env.MAILER_EMAIL,
-        pass: process.env.MAILER_PASSWORD
+        pass: process.env.MAILER_PASSWORD,
       }
     }));
 
