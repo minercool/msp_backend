@@ -8,7 +8,7 @@ const cors = require('cors');
  
 app.use(cors());
 
-const stripe = require("stripe")("sk_test_51LhR3nHklgsUk5BlDvYeg76gh4G1EsuRmGS8gS8GTcFGoBTYx2kmuZenXnYKqFOkV3okojL04DHqAIs0YPUmOqKR00GEQZcoHv");
+const stripe = require("stripe")("sk_test_0w9JdyiHjxNoBG9IP5YjJbfO00iTUfZceU");
 
 
 router.post("/", (req, res) => {

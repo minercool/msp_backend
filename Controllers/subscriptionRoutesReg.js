@@ -7,6 +7,7 @@ const https = require('https');
 const subscriptionModelSchema = require('../Models/SubscriptionModel');
 const Invoice = require('../Models/invoiceModel');
 const productModelSchema = require("../Models/ProductModel");
+const moment = require('moment');
 
 const mailer = require('./email/mailer')
 
@@ -18,9 +19,6 @@ router.get('/getdetails',async (req,res)=>{
         "pfx": fs.readFileSync(__dirname + '/../certif/cbd77447463b43a3a406f809fe046e9fbae30ee6ab5149509bd9a92523888b84.pfx'),
         "passphrase": process.env.PASSPHRASE2,
         }
-  
-        
-        
       
         const options = {
           url: CREDENTIALS.certurl + `/Subscriptions/v2.0/api/Subscription/getdetails?SubscriptionId=${req.query.SubscriptionId}`,
@@ -84,7 +82,7 @@ router.post('/create',async (req,res)=>{
         quantity : req.body.Quantity,
         reseller : req.body.reseller,
         approvalCode : req.body.ApprovalCode,
-        
+        date : moment().format('D MMMM YYYY')
         
     }
 

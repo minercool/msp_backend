@@ -34,7 +34,11 @@ const subscriptionModelSchema = new mongoose.Schema({
     },
     approvalCode : {
         type : String,
-    }
+    },
+	
+	date : {
+		type : String,
+	}
 })
 
 module.exports = mongoose.model('subscription' , subscriptionModelSchema )

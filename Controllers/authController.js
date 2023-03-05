@@ -128,7 +128,7 @@ router.post('/resetPassword', function(req, res){
                     subject: 'Password reset',
                     html: "<div style='padding: 80px;color:#96989f;font-size:20px;font-family: system-ui,sans-serif;'> <h2 style='font-size: 40px !important;font-weight: 900;color:black !important;font-family: system-ui,sans-serif;text-align: center;height:inherit'>Reset your password</h2> "+
                     "<hr/><br/> <p style='color:#96989f;'> You're receiving this email because you requested a password reset for your <span style='font-weight: bold;''>MSP</span> account.</p> <p style='color:#96989f;'>Please tap the button below to choose a new password.</p><br/>"+
-                    "<a href='http://localhost:4200/reset-password/"+token+"'>"+
+                    "<a href='https://www.mspforafrica.com/reset-password/"+token+"'>"+
                     "<button style='background: linear-gradient( 45deg , #3f51b5, #00bcd4); color: white; padding: 15px 30px; font-weight: bold; border-radius: 20px; border-style: none; box-shadow: 10 10 10; box-shadow: 0 12px 15px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19) !important;'>RESET PASSWORD</button></a></div>"
                 });
                 return res.status(200).send({'email': 'email was sended successfully'});

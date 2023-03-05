@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const handlebars = require('handlebars');
 const fs = require('fs');
+var smtpTransport = require('nodemailer-smtp-transport');
 module.exports = {
     alimenter_credit : function(name,email){
         var readHTMLFile = function (path, callback) {
@@ -14,13 +15,15 @@ module.exports = {
                 }
             });
         };
-        var transporter = nodemailer.createTransport({
-            service: 'hotmail',
+        var transporter = nodemailer.createTransport(smtpTransport({
+            host : 'ssl0.ovh.net',
+			port : 587,
+			secureConnection: true,
             auth: {
                 user: process.env.MAILER_EMAIL,
                 pass: process.env.MAILER_PASSWORD
             }
-        });
+        }));
         readHTMLFile('./Controllers/email/alimenter_credit.html', function (err, html) {
             var template = handlebars.compile(html);
             var replacements = {
@@ -55,13 +58,15 @@ module.exports = {
                 }
             });
         };
-        var transporter = nodemailer.createTransport({
-            service: 'hotmail',
+        var transporter = nodemailer.createTransport(smtpTransport({
+            host : 'ssl0.ovh.net',
+			port : 587,
+			secureConnection: true,
             auth: {
                 user: process.env.MAILER_EMAIL,
                 pass: process.env.MAILER_PASSWORD
             }
-        });
+        }));
         readHTMLFile('./Controllers/email/arrete_change_souscription.html', function (err, html) {
             var template = handlebars.compile(html);
             var replacements = {
@@ -97,13 +102,15 @@ module.exports = {
                 }
             });
         };
-        var transporter = nodemailer.createTransport({
-            service: 'hotmail',
+        var transporter = nodemailer.createTransport(smtpTransport({
+            host : 'ssl0.ovh.net',
+			port : 587,
+			secureConnection: true,
             auth: {
                 user: process.env.MAILER_EMAIL,
                 pass: process.env.MAILER_PASSWORD
             }
-        });
+        }));
         readHTMLFile('./Controllers/email/changement_credit.html', function (err, html) {
             var template = handlebars.compile(html);
             var replacements = {
@@ -139,13 +146,15 @@ module.exports = {
                 }
             });
         };
-        var transporter = nodemailer.createTransport({
-            service: 'hotmail',
+        var transporter = nodemailer.createTransport(smtpTransport({
+            host : 'ssl0.ovh.net',
+			port : 587,
+			secureConnection: true,
             auth: {
                 user: process.env.MAILER_EMAIL,
                 pass: process.env.MAILER_PASSWORD
             }
-        });
+        }));
         readHTMLFile('./Controllers/email/commande_souscription.html', function (err, html) {
             var template = handlebars.compile(html);
             var replacements = {
@@ -182,13 +191,15 @@ module.exports = {
                 }
             });
         };
-        var transporter = nodemailer.createTransport({
-            service: 'hotmail',
+        var transporter = nodemailer.createTransport(smtpTransport({
+            host : 'ssl0.ovh.net',
+			port : 587,
+			secureConnection: true,
             auth: {
                 user: process.env.MAILER_EMAIL,
                 pass: process.env.MAILER_PASSWORD
             }
-        });
+        }));
         readHTMLFile('./Controllers/email/compte_revendeur_cree.html', function (err, html) {
             var template = handlebars.compile(html);
             var replacements = {
@@ -223,13 +234,15 @@ module.exports = {
                 }
             });
         };
-        var transporter = nodemailer.createTransport({
-            service: 'hotmail',
+        var transporter = nodemailer.createTransport(smtpTransport({
+            host : 'ssl0.ovh.net',
+			port : 587,
+			secureConnection: true,
             auth: {
                 user: process.env.MAILER_EMAIL,
                 pass: process.env.MAILER_PASSWORD
             }
-        });
+        }));
         readHTMLFile('./Controllers/email/demande_ouverture_compte.html', function (err, html) {
             var template = handlebars.compile(html);
             var replacements = {
@@ -264,13 +277,15 @@ module.exports = {
                 }
             });
         };
-        var transporter = nodemailer.createTransport({
-            service: 'hotmail',
+        var transporter = nodemailer.createTransport(smtpTransport({
+            host : 'ssl0.ovh.net',
+			port : 587,
+			secureConnection: true,
             auth: {
                 user: process.env.MAILER_EMAIL,
                 pass: process.env.MAILER_PASSWORD
             }
-        });
+        }));
         readHTMLFile('./Controllers/email/facture_comptable.html', function (err, html) {
             var template = handlebars.compile(html);
             var replacements = {
@@ -305,13 +320,15 @@ module.exports = {
                 }
             });
         };
-        var transporter = nodemailer.createTransport({
-            service: 'hotmail',
+        var transporter = nodemailer.createTransport(smtpTransport({
+            host : 'ssl0.ovh.net',
+			port : 587,
+			secureConnection: true,
             auth: {
                 user: process.env.MAILER_EMAIL,
                 pass: process.env.MAILER_PASSWORD
             }
-        });
+        }));
         readHTMLFile('./Controllers/email/suspend.html', function (err, html) {
             var template = handlebars.compile(html);
             var replacements = {
