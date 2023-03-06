@@ -216,6 +216,7 @@ router.post("/modify/:id", (req, res) => {
 
   informations.Password = myPassword;
   informations.Status = myStatus;
+  informations.creditUser = informationsInfo.creditUser
   informations.creditLimit = informationsInfo.creditLimit
   contact.Logo = myLogo;
   const reseller = new resellerModule({

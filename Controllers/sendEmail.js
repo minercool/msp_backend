@@ -6,6 +6,7 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const details = require("../details.json");
+var smtpTransport = require('nodemailer-smtp-transport');
 
 
 router.get('/', async (req, res) => {
@@ -98,10 +99,10 @@ router.post('/generateCode', (req, res) => {
         pass: process.env.MAILER_PASSWORD,
       }
     }));
-
+	console.log(process.env.MAILER_EMAIL);
     let mailOptions = {
       from: process.env.MAILER_EMAIL,
-      to: process.env.RESPONSABLE, // list of receivers
+      to: 'yassine.karrech@yahoo.com', // list of receivers
       subject: "Code de verification  🔑", // Subject line
       html: `<h1>Code :  ${newCode}  </h1><br>
         <h4>Thanks for joining MSP</h4>`
